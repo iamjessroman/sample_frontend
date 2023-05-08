@@ -1,0 +1,126 @@
+.View-logo {
+  height: auto;
+  left: 57px;
+  opacity: 1;
+  top: 17px;
+  width: 230px;
+}
+
+.View-header {
+  background-color: #0750a4;
+  padding: 10px;
+  padding-left: 50px;
+}
+
+.View-body {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  min-height: 80vh;
+  justify-content: center;
+}
+
+.View-image-principal {
+  height: 503px;
+  left: 186px;
+  opacity: 1;
+  top: 241px;
+  height: 503px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.View-body-image-secondary {
+  display: flex;
+  flex-direction: column;
+  height: 503px;
+  padding-left: 50px;
+  padding-top: 50px;
+}
+
+.View-image-secondary {
+  top: 265px;
+  left: 649px;
+  width: 128px;
+  height: 159px;
+  border: 1px solid #b2bec3;
+  opacity: 1;
+  margin-bottom: 40px;
+}
+
+.View-body-description {
+  display: flex;
+  flex-direction: column;
+  height: 503px;
+  width: 882px;
+  padding-left: 150px;
+}
+
+.View-body-colors {
+  display: flex;
+  flex-direction: row;
+}
+.View-description-title {
+  height: 38px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+}
+
+.View-description-subtitle {
+  color: #636e72;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  letter-spacing: 0px;
+  letter-spacing: 0px;
+  opacity: 1;
+  opacity: 1;
+  text-align: left;
+}
+
+.View-description-price {
+  height: 38px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.View-description-colors {
+  height: 38px;
+  text-align: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.View-description-return {
+  background-color: white;
+  border-color: red;
+  border-style: solid;
+  border: transparent;
+  color: #000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  height: 38px;
+  letter-spacing: 0px;
+  opacity: 1;
+  margin-top: 1%;
+  margin-left: 90%;
+}
