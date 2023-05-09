@@ -22,6 +22,8 @@ function View() {
 
   const getTitle = () => {
     switch (type) {
+      case "simple":
+        return location.state.res.product.title;
       case "variable":
         return location.state.res.product.title;
       case "variation":
@@ -31,6 +33,8 @@ function View() {
 
   const getImage = () => {
     switch (type) {
+      case "simple":
+        return location.state.res.product.image.src;
       case "variable":
         return location.state.res.product.images[0].src;
       case "variation":
@@ -104,110 +108,116 @@ function View() {
             $ {(Math.round(price * 100) / 100).toFixed(2)}
           </div>
 
-          <div className="View-description-colors">Tallas</div>
-          <div className="View-body-colors">
-            {location.state.res.product.options[1].values.map((value) => {
-              return (
-                <button
-                  type="submit"
-                  style={{
-                    "border-style": "solid",
-                    "border-color": "#b2bec3",
-                    background: "#ffffff",
-                    width: 40,
-                    height: 40,
-                    borderWidth: option2 === value ? 5 : 1,
-                    textAlign: "center",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    display: "flex",
-                    borderRadius: 10,
-                    margin: 2,
-                  }}
-                  onClick={() => {
-                    if (option2 === undefined) {
-                      setOption1(
-                        location.state.res.product.options[0].values[0]
-                      );
-                      setOption2(value);
-                      getVariant(
-                        location.state.res.product.options[0].values[0],
-                        value
-                      );
-                    } else {
-                      setOption2(value);
-                      getVariant(option1, value);
-                    }
-                  }}
-                >
-                  {value}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="View-description-colors">Colores</div>
-          <div className="View-body-colors">
-            {location.state.res.product.options[0].values.map(
-              (value, index) => {
-                return (
-                  <button
-                    type="submit"
-                    style={{
-                      background: "#ffffff",
-                      "border-style": "solid",
-                      border: "transparent",
-                    }}
-                    onClick={() => {
-                      if (option1 === undefined) {
-                        setOption2(
-                          location.state.res.product.options[1].values[0]
-                        );
-                        setOption1(value);
-                        getVariant(
-                          value,
-                          location.state.res.product.options[1].values[0]
-                        );
-                      } else {
-                        setOption1(value);
-                        getVariant(value, option2);
-                      }
-                    }}
-                  >
-                    {value === "White" && (
-                      <FontAwesomeIcon
-                        icon={Circle}
-                        color={"#b2bec3"}
-                        fontSize={option1 === value ? 60 : 45}
-                        style={{
-                          marginRight: 5,
-                          "border-style": "solid",
-                          "border-color": "transparent",
-                          borderRadius: 30,
-                        }}
-                      />
-                    )}
-
-                    {value !== "White" && (
-                      <FontAwesomeIcon
-                        icon={faCircle}
-                        color={
-                          location.state.res.product.options[2].values[index]
+          {type === "varible" && (
+            <div>
+              <div className="View-description-colors">Tallas</div>
+              <div className="View-body-colors">
+                {location.state.res.product.options[1].values.map((value) => {
+                  return (
+                    <button
+                      type="submit"
+                      style={{
+                        "border-style": "solid",
+                        "border-color": "#b2bec3",
+                        background: "#ffffff",
+                        width: 40,
+                        height: 40,
+                        borderWidth: option2 === value ? 5 : 1,
+                        textAlign: "center",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        display: "flex",
+                        borderRadius: 10,
+                        margin: 2,
+                      }}
+                      onClick={() => {
+                        if (option2 === undefined) {
+                          setOption1(
+                            location.state.res.product.options[0].values[0]
+                          );
+                          setOption2(value);
+                          getVariant(
+                            location.state.res.product.options[0].values[0],
+                            value
+                          );
+                        } else {
+                          setOption2(value);
+                          getVariant(option1, value);
                         }
-                        fontSize={option1 === value ? 60 : 45}
+                      }}
+                    >
+                      {value}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="View-description-colors">Colores</div>
+              <div className="View-body-colors">
+                {location.state.res.product.options[0].values.map(
+                  (value, index) => {
+                    return (
+                      <button
+                        type="submit"
                         style={{
-                          marginRight: 5,
+                          background: "#ffffff",
                           "border-style": "solid",
-                          "border-color": "transparent",
-                          borderRadius: 30,
+                          border: "transparent",
                         }}
-                      />
-                    )}
-                  </button>
-                );
-              }
-            )}
-          </div>
+                        onClick={() => {
+                          if (option1 === undefined) {
+                            setOption2(
+                              location.state.res.product.options[1].values[0]
+                            );
+                            setOption1(value);
+                            getVariant(
+                              value,
+                              location.state.res.product.options[1].values[0]
+                            );
+                          } else {
+                            setOption1(value);
+                            getVariant(value, option2);
+                          }
+                        }}
+                      >
+                        {value === "White" && (
+                          <FontAwesomeIcon
+                            icon={Circle}
+                            color={"#E9E9E9"}
+                            fontSize={option1 === value ? 60 : 45}
+                            style={{
+                              marginRight: 5,
+                              "border-style": "solid",
+                              "border-color": "transparent",
+                              borderRadius: 30,
+                            }}
+                          />
+                        )}
+
+                        {value !== "White" && (
+                          <FontAwesomeIcon
+                            icon={faCircle}
+                            color={
+                              location.state.res.product.options[2].values[
+                                index
+                              ]
+                            }
+                            fontSize={option1 === value ? 60 : 45}
+                            style={{
+                              marginRight: 5,
+                              "border-style": "solid",
+                              "border-color": "transparent",
+                              borderRadius: 30,
+                            }}
+                          />
+                        )}
+                      </button>
+                    );
+                  }
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
