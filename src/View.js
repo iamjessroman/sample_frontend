@@ -1,13 +1,11 @@
-import { faCircle, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle as Circle } from "@fortawesome/free-regular-svg-icons";
-import { ChangeEvent, useState } from "react";
-import "./View.css";
-import logo from "./logo.png";
-import Rest from "./rest.js";
-import { useLocation, useNavigate } from "react-router-dom";
+import { faChevronLeft, faCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import parse from "html-react-parser";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import logo from "./logo.png";
+import "./View.css";
 
 function View() {
   const location = useLocation();
@@ -21,13 +19,16 @@ function View() {
   );
 
   const getTitle = () => {
+    let title = location.state.res.product.title.replace(/&trade;/g, "");
+    title = location.state.res.product.title.replace(/&reg;/g, "");
+
     switch (type) {
       case "simple":
-        return location.state.res.product.title;
+        return title;
       case "variable":
-        return location.state.res.product.title;
+        return title;
       case "variation":
-        return `${location.state.res.product.title}-${option2}-${option1} `;
+        return `${title}-${option2}-${option1} `;
     }
   };
 
@@ -73,7 +74,9 @@ function View() {
           <div>
             <div className="View-description-atributtes">{item.name}</div>
             <div className="View-body-atributtes">
-              <div className="View-value-atributtes">{item.value}</div>
+              {item.value.map((i) => {
+                return <div className="View-value-atributtes">{i}</div>;
+              })}
             </div>
           </div>
         );
@@ -122,7 +125,7 @@ function View() {
             $ {(Math.round(price * 100) / 100).toFixed(2)}
           </div>
 
-          {type === "varible" && (
+          {type !== "simple" && (
             <div>
               <div className="View-description-colors">Tallas</div>
               <div className="View-body-colors">
