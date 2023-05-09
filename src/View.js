@@ -1,5 +1,6 @@
 import { faCircle, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle as Circle } from "@fortawesome/free-regular-svg-icons";
 import { ChangeEvent, useState } from "react";
 import "./View.css";
 import logo from "./logo.png";
@@ -12,7 +13,6 @@ function View() {
   const location = useLocation();
   const navigate = useNavigate();
   const [type, setType] = useState(location.state.res.product.type);
-  const [variant, setVariant] = useState(location.state.res.product.variant);
   const [option1, setOption1] = useState(location.state.res.product.option1);
   const [option2, setOption2] = useState(location.state.res.product.option2);
   const [price, setPrice] = useState(location.state.res.product.price);
@@ -116,7 +116,7 @@ function View() {
                     background: "#ffffff",
                     width: 40,
                     height: 40,
-                    borderWidth: 1,
+                    borderWidth: option2 === value ? 5 : 1,
                     textAlign: "center",
                     alignItems: "center",
                     justifyContent: "center",
@@ -125,8 +125,19 @@ function View() {
                     margin: 2,
                   }}
                   onClick={() => {
-                    setOption2(value);
-                    getVariant(option1, value);
+                    if (option2 === undefined) {
+                      setOption1(
+                        location.state.res.product.options[0].values[0]
+                      );
+                      setOption2(value);
+                      getVariant(
+                        location.state.res.product.options[0].values[0],
+                        value
+                      );
+                    } else {
+                      setOption2(value);
+                      getVariant(option1, value);
+                    }
                   }}
                 >
                   {value}
@@ -145,21 +156,53 @@ function View() {
                     style={{
                       background: "#ffffff",
                       "border-style": "solid",
-                      border: " transparent",
+                      border: "transparent",
                     }}
                     onClick={() => {
-                      setOption1(value);
-                      getVariant(value, option2);
+                      if (option1 === undefined) {
+                        setOption2(
+                          location.state.res.product.options[1].values[0]
+                        );
+                        setOption1(value);
+                        getVariant(
+                          value,
+                          location.state.res.product.options[1].values[0]
+                        );
+                      } else {
+                        setOption1(value);
+                        getVariant(value, option2);
+                      }
                     }}
                   >
-                    <FontAwesomeIcon
-                      icon={faCircle}
-                      color={
-                        location.state.res.product.options[2].values[index]
-                      }
-                      fontSize={45}
-                      style={{ marginRight: 5 }}
-                    />
+                    {value === "White" && (
+                      <FontAwesomeIcon
+                        icon={Circle}
+                        color={"#b2bec3"}
+                        fontSize={option1 === value ? 60 : 45}
+                        style={{
+                          marginRight: 5,
+                          "border-style": "solid",
+                          "border-color": "transparent",
+                          borderRadius: 30,
+                        }}
+                      />
+                    )}
+
+                    {value !== "White" && (
+                      <FontAwesomeIcon
+                        icon={faCircle}
+                        color={
+                          location.state.res.product.options[2].values[index]
+                        }
+                        fontSize={option1 === value ? 60 : 45}
+                        style={{
+                          marginRight: 5,
+                          "border-style": "solid",
+                          "border-color": "transparent",
+                          borderRadius: 30,
+                        }}
+                      />
+                    )}
                   </button>
                 );
               }
