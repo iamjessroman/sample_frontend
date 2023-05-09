@@ -66,6 +66,20 @@ function View() {
     });
   };
 
+  const getRenderAtributtes = () => {
+    return location.state.res.product.options_atributtes.map((item) => {
+      if (item.name !== "")
+        return (
+          <div>
+            <div className="View-description-atributtes">{item.name}</div>
+            <div className="View-body-atributtes">
+              <div className="View-value-atributtes">{item.value}</div>
+            </div>
+          </div>
+        );
+    });
+  };
+
   return (
     <div className="View">
       <header className="View-header">
@@ -218,6 +232,8 @@ function View() {
               </div>
             </div>
           )}
+
+          {type === "simple" && getRenderAtributtes()}
         </div>
       </div>
     </div>
